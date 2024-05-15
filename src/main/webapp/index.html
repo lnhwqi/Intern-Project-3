@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Hwqi Website</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link rel="shortcut icon" href="./assets/images/logo.jpg">
+        <script src="https://kit.fontawesome.com/298cd1d7bc.js" crossorigin="anonymous"></script>
+
+
+        
+        <link href="./assets/css/reset.css" rel="stylesheet" type="text/css">
+        <link href="./assets/css/styles.css" rel="stylesheet" type="text/css">
+        
+    </head>
+    <body>
+        <div id="blur" style=""></div>
+        <div id="log-in-modal">
+            <h2 class="log-in-title">LOG IN</h2>
+            <i class="x-btn fa-solid fa-x" style="position: absolute; top: 0; right: 0; padding: 16px; background-color: #18206f; color: #d4af37; font-size: 20px; border-top-right-radius: 18px; cursor: pointer"></i>
+            <form action="Login" method="post">
+                <table>
+                    <tr> 
+                        <th>Username: </th>
+                        <td><input type="text" id="username1" name="username1" style="width: 160px" required></td>
+                    </tr>
+                    <tr> 
+                        <th>Password: </th>
+                        <td><input type="text" id="password1" name="password1" style="width: 160px" required></td>
+                    </tr>
+                    <tr>              
+                        <td colspan="2" ><input type="submit" style="width: 100%" value="Submit"></td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+        <div id="sign-up-modal" style="position: absolute">
+            <h2 class="sign-up-title">SIGN UP</h2>
+            <i  class="x-btn fa-solid fa-x"></i>
+            <form action="Signup" method="post">
+                <table>
+                    <tr> 
+                        <th>Username: </th>
+                        <td><input type="text" id="username" name="username" style="width: 160px" required></td>
+                    </tr>
+                    <tr> 
+                        <th>Password: </th>
+                        <td><input type="text" id="password" name="password" style="width: 160px" required></td>
+                    </tr>
+                    <tr> 
+                        <th>Password (*): </th>
+                        <td><input type="text" id="password2" name="password2" style="width: 160px" required></td>
+                    </tr>
+                    <tr> 
+                        <th>Phone: </th>
+                        <td><input type="text" id="phone" name="phone" style="width: 160px" required></td>
+                    </tr>
+                    <tr>              
+                        <td colspan="2" ><input class="sign-up-btn" type="submit" style="width: 100%" value="Submit"></td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+        
+        <div class="left">
+            <div class="info" style="min-height: 50vh">
+                <h1 id="title" ></h1>
+                <h2 id="subtitle"></h2>
+                <p id="desc"></p>
+            </div>
+            <div class="action">
+                <a id="log-in" class="btn log-in" href="#!">Log In</a>
+                <a id="sign-up" class="btn sign-up" href="#!">Sign Up</a>
+            </div>
+        </div>
+        <div class="right">
+            <div class="logo"></div>  
+            <ul id="contact-list" >
+                <li><a href="https://www.facebook.com/lwnhuy"><i class="fa-brands fa-facebook" ></i></a></li>
+                <li><a href="https://github.com/lnhwqi/ZNewsClone"><i class="fa-brands fa-github" ></i></a></li>
+                <li><a href="tel:+84948205746"><i class="fa-solid fa-phone" ></i></a></li>
+                <li><a href="lnhuy2024@gmail.com"><i class="fa-solid fa-envelope"></i></a></li>
+            </ul>
+        </div>
+        
+        <script>
+            const titleString = "Welcome, hello, Im hwqi, let sign up for log in";
+            const subtitleString = " - - - - - - - - - - - - - - - - - - - - - - - - - - ";
+            const descString = "hairs not straight, im too ";
+            
+            
+            const login= document.getElementById("log-in");
+            const signup = document.getElementById("sign-up");
+            const blurModal = document.getElementById("blur");
+            const xBtn = document.getElementsByClassName("x-btn");
+
+            console.log(titleString.split("").length + subtitleString.split("").length + descString.split("").length);
+
+            function displayLetters() {
+                let index = 0; //start point
+                const interval = setInterval(function() {
+                    if (index < titleString.split("").length) {
+                        // Display the next point
+                        document.getElementById("title").textContent += titleString.split("")[index];
+                        index++;
+                    }
+                    else if (index < (titleString.split("").length + subtitleString.split("").length)) {
+                        // Display the next point
+                        document.getElementById("subtitle").textContent += subtitleString.split("")[index - titleString.split("").length];
+                        index++;
+                    }
+                    else if (index < titleString.split("").length + subtitleString.split("").length + descString.split("").length) {
+                        // Display the next point
+                        document.getElementById("desc").textContent += descString.split("")[index - titleString.split("").length - subtitleString.split("").length];
+                        index++;
+                    }
+                    else {
+                        clearInterval(interval);
+                    }
+                }, 65); 
+            }
+            displayLetters();
+            
+            login.addEventListener('click',function(){
+                document.getElementById("log-in-modal").classList.toggle("visibility");
+                blurModal.style.display = "block";
+            });
+            signup.addEventListener('click',function(){
+                document.getElementById("sign-up-modal").classList.toggle("visibility");
+                blurModal.style.display = "block";
+            });
+            blurModal.addEventListener('click',function(){
+                document.getElementById("log-in-modal").classList.remove("visibility");
+                document.getElementById("sign-up-modal").classList.remove("visibility");
+                blurModal.style.display = "none";
+            });
+            
+            var myFunction = function() {
+                document.getElementById("log-in-modal").classList.remove("visibility");
+                document.getElementById("sign-up-modal").classList.remove("visibility");
+                blurModal.style.display = "none";
+            };
+
+            for (var i = 0; i < xBtn.length; i++) {
+                xBtn[i].addEventListener('click', myFunction, false);
+            }
+            
+        </script>
+    </body>
+
+</html>

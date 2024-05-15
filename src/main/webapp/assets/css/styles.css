@@ -1,0 +1,178 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : May 14, 2024, 2:42:52 PM
+    Author     : lengo
+*/
+body{
+    background: linear-gradient(112.1deg, rgb(32, 38, 57) 19.4%, rgb(63, 76, 119) 70.2%);
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+}
+.left{
+    width: 64%;
+    padding: 4%;
+    font-family: "Gill Sans", sans-serif; 
+    color: #fff;
+
+}
+.left #title{
+    font-size: 32px;
+    font-weight: 700;
+    line-height: 1.4;
+}
+.left #subtitle{
+    line-height: 1.8;
+    font-size: 14px;
+    font-weight: 600;
+    margin: 16px;
+}
+.left #desc{
+    line-height: 1.3;
+    font-style: italic;
+    font-size: 12px;
+    margin-left: 32px;
+}
+.right{
+    width: 36%;
+    display: flex;
+    justify-content:start;
+    align-items: center;
+    flex-direction: column;
+    padding-top: 4%;
+    gap: 42px;
+}
+.logo{
+    background: url(../images/logo.jpg);
+    width: 128px;
+    height: 128px;
+    border-radius: 90px;
+    background-repeat: no-repeat;
+    transition: background-size 3s ease;
+    background-position: center;
+    background-size: auto 100%;
+    box-shadow: 0 3px 9px #000, inset 0 0 66px #000;   
+}
+.logo:hover{
+    background-size: auto 118%;
+    cursor: pointer;
+}
+.right #contact-list{
+    display:flex; 
+    position: relative;
+    font-size: 24px;
+}
+.right #contact-list a{
+    background-color: #d4af37; 
+    color: #18206f; 
+    padding: 12px;
+    margin: 0 12px;
+    border-radius: 16px;
+}
+.action{
+    display: flex;
+}
+
+.btn{
+    padding: 12px 20px;
+    border-radius: 16px;
+    text-decoration: none;
+    width: 120px;
+    text-align: center;
+    font-size: 16px;
+    font-weight: 700;
+    box-shadow: 0 3px 9px #000, inset 0 0 0px #000;
+}
+.log-in{
+    background-color: #d4af37;
+    margin-right: 24px; 
+    color: rgb(32, 38, 57);
+}
+.sign-up{
+    background-color: #18206f;
+    color: #ccc;
+}
+#log-in-modal, #sign-up-modal{
+    position: absolute; 
+    background: #d4af37; 
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: rgb(32, 38, 57);
+    z-index: 5; 
+    box-shadow: 0 3px 9px #000;   
+    padding: 80px 120px;
+    left: 50%;
+    top: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    border-radius: 18px;
+    border: 1px solid rgb(32, 38, 57);
+}
+#log-in-modal .log-in-title, #sign-up-modal .sign-up-title{
+    font-size: 32px;
+    font-weight: 700;
+    line-height: 2.0;
+    text-align: center;
+    color: #18206f
+}
+#log-in-modal th, #sign-up-modal th{
+    font-weight: 700;
+    color: #18206f;
+    text-transform: capitalize;
+    text-align: left;
+    font-size: 20px;
+}
+#log-in-modal td, #sign-up-modal td{
+    padding: 12px 0;
+    color: #18206f;
+}
+#log-in-modal .log-in-btn, #sign-up-modal .sign-up-btn{
+    cursor: pointer;
+    font-weight: 700;
+    color: #18206f;
+}
+#log-in-modal input,#sign-up-modal input{
+    padding: 8px;
+    color: #18206f;
+    font-weight: 700;
+    border-radius: 8px;
+
+}
+.x-btn{
+    position: absolute; 
+    top: 0; 
+    right: 0; 
+    padding: 16px; 
+    background-color: #18206f; 
+    color: #d4af37; 
+    font-size: 20px; 
+    border-top-right-radius: 18px; 
+    border-bottom-left-radius: 18px; 
+}
+.x-btn:hover{
+    cursor: pointer;
+}
+#blur{
+    position: fixed;
+    display: none;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #fff;
+    opacity: 0.4;
+    overflow: hidden;
+    z-index: 2;
+}
+.visibility{
+    display: flex !important;
+}
+.hidden{
+    display: none !important;
+}
+
+
