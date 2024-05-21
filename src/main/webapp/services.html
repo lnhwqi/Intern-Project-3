@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit this template
+-->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="./assets/images/logo.jpg">
+    <link href="./assets/css/reset.css" rel="stylesheet" type="text/css">
+    <link href="./assets/css/styles.css" rel="stylesheet" type="text/css">
+    <script src="https://kit.fontawesome.com/298cd1d7bc.js" crossorigin="anonymous"></script>
+    <title>Main Page</title>
+    <style>
+        ::-webkit-scrollbar {
+            width: 4px; /* Set the width of the scrollbar */
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background-color: #000; /* Set the color of the scrollbar thumb */
+            border-radius: 4px; /* Round the corners of the thumb */
+        }
+
+        ::-webkit-scrollbar-track {
+            background-color: #f1f1f1; /* Set the color of the scrollbar track */
+        }
+        body{
+/*            background-color: #d4af37;
+            */
+            width: 100vw;
+            min-height: 100vh;
+            color: #d4af37;
+        }
+        #header{
+            margin: 24px 0 0 24px;
+            font-size: 14px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+        }
+        #time{
+            padding-bottom: 4px;
+            font-style: italic;
+            /*border-bottom: 1px solid var(--primary-bgc);*/
+        }
+        #client{
+            margin-left: 12px;
+            color: var(--primary-color);
+            background: var(--primary-bgc);
+            padding: 12px 16px;
+            border-radius: 4px;
+            box-shadow: 0 3px 9px #000;  
+        }
+        .service-title{
+            font-size: 32px;
+            font-weight: 700;
+            line-height: 3.2;
+            margin-left: 24px;
+            text-transform: uppercase;
+        }
+        #service-list{
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            width: 100%;
+            /*justify-content: space-around;*/
+            /*align-items: center;*/
+            /*margin: 0 12px;*/ 
+            gap: 26px;
+            padding: 0 24px;
+        }
+        .service-item{
+            width: 100%;
+            height: auto;
+            display: flex;
+            flex-direction: row-reverse;
+            justify-content: start;
+            /*align-items: center;*/
+            padding: 18px;
+            border: 2px solid #d4af37;
+            border-radius: 12px;
+            color: #d4af37;    
+            background: linear-gradient(112.1deg, rgb(32, 38, 57) 1.4%, rgb(63, 76, 119) 7.2%);   
+        }
+        .service-item:hover{
+            cursor: pointer;
+            color: #DD3333;
+            border-color: #DD3333;
+        }
+        .service-item-header{
+            margin: 8px 0 8px 12px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .service-item-rate{
+            
+        }
+        .service-item-title{
+            font-size: 18px;
+            font-weight: 700;
+            line-height: 1.3;
+        }
+        .service-item-img{
+            width: 98px;
+            height: 98px;
+            object-fit: cover;
+            object-position: center;
+            border-radius: 11px;
+            box-shadow: 0 3px 9px #000, inset 0 0 66px #000;  
+        }
+        
+        
+        
+    </style>
+</head>
+<body>
+    <div id="header">
+        <p id="time"></p>
+        <a href="#!" id="client"></a>
+    </div>
+    <a id="logout" href="#!" style="position:absolute; top: 24px; right: 24px; padding: 8px 12px; background: var(--primary-bgc); color: var(--primary-color); font-weight: 700; border: 1px solid #000; border-radius: 4px">Log Out</a>
+
+
+    <h1 class="service-title">Services</h1>
+    <div id="service-list">
+    </div>
+
+    <script>
+        document.getElementById("header").style.display = "flex";
+        let urlParams = new URLSearchParams(window.location.search);
+        let username = urlParams.get('username');
+        
+        document.getElementById("logout").href = "index.html";
+        
+        function updateTime() {
+            let currentTime = new Date();
+            let hours = currentTime.getHours();
+            let minutes = currentTime.getMinutes();
+            let seconds = currentTime.getSeconds();
+            hours = (hours < 10 ? '0' : '') + hours;
+            minutes = (minutes < 10 ? '0' : '') + minutes;
+            seconds = (seconds < 10 ? '0' : '') + seconds;
+            let timeString = hours + ':' + minutes + ':' + seconds;
+            document.getElementById('time').textContent = timeString +" , ";
+        }
+        updateTime();
+        setInterval(updateTime, 1000);
+   
+        function updateUsername() {
+
+            let usernameElement = document.getElementById('client');
+            document.getElementById("client").href="PersonInfor.jsp?username=" + encodeURIComponent(username) ;
+            usernameElement.textContent = "Welcome, "+ username;
+        }
+        updateUsername();
+        
+        
+        function fetchData() {
+          fetch('data.json')
+            .then(response => response.json())
+            .then(data => displayData(data))
+            .catch(error => console.error('Error fetching data:', error));
+        }
+
+        // Function to display JSON data
+        function displayData(data) {
+          const serviceList = document.getElementById('service-list');
+
+          // Clear existing list items
+          serviceList.innerHTML = '';
+
+          // Loop through JSON data and create list items
+          data.services.forEach(service => {
+            const item = document.createElement('div');
+            item.classList.add("service-item");
+
+            const header = document.createElement("div");
+            header.classList.add("service-item-header");
+            
+            const title = document.createElement("p");
+            title.classList.add("service-item-title");
+            title.textContent = service.title;
+
+            const rate = document.createElement("div");
+            rate.classList.add("service-item-rate");
+            rate.textContent = service.rate;
+
+            const desc = document.createElement("img");
+            desc.classList.add("service-item-img");
+            desc.src = service.imageUrl;
+
+
+            item.addEventListener('click', () => navigateToTemplate(service.id, service.title));
+            header.appendChild(title);
+            header.appendChild(rate);
+
+            item.appendChild(header);
+            item.appendChild(desc);
+
+            serviceList.appendChild(item);
+          });
+        }
+
+        // Function to navigate to template page with user ID
+        function navigateToTemplate(id, title) {
+            
+window.location.href = "template.jsp?username=" + encodeURIComponent(username) + "&serviceid=" + id + "&servicename=" + encodeURIComponent(title);
+        }
+
+        // Load data when the page is loaded
+        window.onload = fetchData;
+//        fetchData();
+    </script>
+</body>
+</html>

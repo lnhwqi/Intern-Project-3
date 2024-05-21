@@ -6,6 +6,7 @@
 package Actions;
 
 import JDBC.JDBCConnection;
+import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -68,16 +69,22 @@ public class Signup extends HttpServlet {
     throws ServletException, IOException {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
+        String phone = request.getParameter("phone");
 
-        int newUser = addUser(username, password);
-
+        int newUser = addClient(username, password, phone);
+        String message ="";
+        
         try (PrintWriter out = response.getWriter()) {
             if (newUser > 0) {
-                out.println("Login successful!");
+                response.sendRedirect("index.html");
             } else {
-                out.println("Invalid username or password.");
+                message="Username used, Please, try to use another one!";
+                request.setAttribute("message", message);
+                RequestDispatcher dispatcher = request.getRequestDispatcher("Signup.jsp");
+                dispatcher.forward(request, response);
             }
         }
+        
     }
 
     /** 
@@ -90,9 +97,9 @@ public class Signup extends HttpServlet {
     }// </editor-fold>
     
     
-    private static int addUser(String username, String password){
+    private static int addClient(String username, String password, String phone){
         int result = 0;
-        String sql = "insert into users(username, password) values('" + username + "','" + password + "')";
+        String sql = "insert into client(username, password, phone) values('" + username + "','" + password + "','" + phone + "')";
         
         try (Connection conn = JDBCConnection.getJDBCConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {

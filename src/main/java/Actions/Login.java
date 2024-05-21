@@ -6,6 +6,7 @@
 package Actions;
 
 import JDBC.JDBCConnection;
+import jakarta.servlet.RequestDispatcher;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -72,15 +73,31 @@ public class Login extends HttpServlet {
         String username = request.getParameter("username1");
         String password = request.getParameter("password1");
 
-        boolean isAuthenticated = checkAuthentcation(username, password);
-
-        try (PrintWriter out = response.getWriter()) {
-            if (isAuthenticated) {
-                response.sendRedirect("index.html");
-            } else {
-                response.sendRedirect("LoginJSP.jsp");
-            }
+        int state = isClient(username, password);
+        String message =" ";
+        
+        if(state == 2){
+            response.sendRedirect("services.html?username="+username);
         }
+        else if(state == 1){
+            message = "Check your password again!";
+            request.setAttribute("errorMessage", message);
+            request.setAttribute("username", username);
+            request.setAttribute("state", state);
+
+            RequestDispatcher dispatcher = request.getRequestDispatcher("Login.jsp");
+            dispatcher.forward(request, response);
+        }else{
+            message = "Your account is not in database";
+            request.setAttribute("errorMessage", message);
+            request.setAttribute("username", username);
+            request.setAttribute("state", state);
+            RequestDispatcher dispatcher = request.getRequestDispatcher("Login.jsp");
+            dispatcher.forward(request, response);
+        }
+        
+
+        
     }
 
     /** 
@@ -93,30 +110,44 @@ public class Login extends HttpServlet {
     }// </editor-fold>
     
     
-    private static boolean checkAuthentcation(String username, String password){
-        boolean valid = false;
-        String sql = "Select * from users where username='" + username +
-                                "' and password='" + password + "'";
-        
-        try (Connection conn = JDBCConnection.getJDBCConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+    private static int isClient(String username, String password){
+      
+        int state = 0; 
 
+        String sqlQuery = "SELECT * FROM client WHERE username=? AND password=?";
+
+        try (Connection conn = JDBCConnection.getJDBCConnection();
+             PreparedStatement stmt = conn.prepareStatement(sqlQuery)) {
+
+            // Set parameters
+            stmt.setString(1, username);
+            stmt.setString(2, password);
 
             try (ResultSet rs = stmt.executeQuery()) {
                 if (rs.next()) {
-//                    if (rs.getString("username").equals(username) && rs.getString("password").equals(password))
-//                    {
-                    valid = true;
-//                    }
-                    
+                    // If there is a match, username and password are correct
+                    state = 2;
+                } else {
+                    // If there is no match, check if the username exists
+                    String sqlUserCheck = "SELECT * FROM client WHERE username=?";
+
+                    try (PreparedStatement userCheckStmt = conn.prepareStatement(sqlUserCheck)) {
+                        userCheckStmt.setString(1, username);
+
+                        try (ResultSet userCheckRs = userCheckStmt.executeQuery()) {
+                            if (userCheckRs.next()) {
+                                // Username exists, but password is incorrect
+                                state = 1;
+                            }
+                        }
+                    }
                 }
-                rs.close();
-                    stmt.close();
-                    conn.close();
             }
         } catch (SQLException e) {
-//            e.printStackTrace();
+            e.printStackTrace();
+            // Handle SQLException appropriately
         }
-        return valid;
+
+        return state;
     }
 }

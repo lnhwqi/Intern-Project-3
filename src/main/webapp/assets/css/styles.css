@@ -6,34 +6,49 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
     Created on : May 14, 2024, 2:42:52 PM
     Author     : lengo
 */
-body{
-    background: linear-gradient(112.1deg, rgb(32, 38, 57) 19.4%, rgb(63, 76, 119) 70.2%);
-    display: flex;
-    width: 100vw;
-    height: 100vh;
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
+:root{
+    --primary-color: #18206f;
+    --primary-bgc:#d4af37;
+}
+html {
+    font-size: 62.5%;
+    overflow-x: hidden;
+}
+body {
+    background: linear-gradient(0deg, rgb(32, 38, 57) 19.4%, rgb(63, 76, 119) 70.2%);      
+    font-size: 1.6rem;
+    font-family: "Poppins", sans-serif;
+    width: 100vw;
+    min-height: 100vh;
+}
+
 .left{
     width: 64%;
     padding: 4%;
-    font-family: "Gill Sans", sans-serif; 
+    /*font-family: "Gill Sans", sans-serif;*/ 
     color: #fff;
 
 }
 .left #title{
-    font-size: 32px;
+    font-size: 3.2rem;
     font-weight: 700;
     line-height: 1.4;
 }
 .left #subtitle{
     line-height: 1.8;
-    font-size: 14px;
+    font-size: 1.4rem;
     font-weight: 600;
     margin: 16px;
 }
 .left #desc{
     line-height: 1.3;
     font-style: italic;
-    font-size: 12px;
+    font-size: 1.2rem;
     margin-left: 32px;
 }
 .right{
@@ -63,7 +78,7 @@ body{
 .right #contact-list{
     display:flex; 
     position: relative;
-    font-size: 24px;
+    font-size: 2.4rem;
 }
 .right #contact-list a{
     background-color: #d4af37; 
@@ -82,7 +97,7 @@ body{
     text-decoration: none;
     width: 120px;
     text-align: center;
-    font-size: 16px;
+    font-size: 1.6rem;
     font-weight: 700;
     box-shadow: 0 3px 9px #000, inset 0 0 0px #000;
 }
@@ -113,7 +128,7 @@ body{
     border: 1px solid rgb(32, 38, 57);
 }
 #log-in-modal .log-in-title, #sign-up-modal .sign-up-title{
-    font-size: 32px;
+    font-size: 3.2rem;
     font-weight: 700;
     line-height: 2.0;
     text-align: center;
@@ -124,10 +139,10 @@ body{
     color: #18206f;
     text-transform: capitalize;
     text-align: left;
-    font-size: 20px;
+    font-size: 2.0rem;
 }
 #log-in-modal td, #sign-up-modal td{
-    padding: 12px 0;
+    padding: 12px 8px;
     color: #18206f;
 }
 #log-in-modal .log-in-btn, #sign-up-modal .sign-up-btn{
@@ -149,7 +164,7 @@ body{
     padding: 16px; 
     background-color: #18206f; 
     color: #d4af37; 
-    font-size: 20px; 
+    font-size: 2.0rem; 
     border-top-right-radius: 18px; 
     border-bottom-left-radius: 18px; 
 }

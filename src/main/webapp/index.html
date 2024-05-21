@@ -5,8 +5,15 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="shortcut icon" href="./assets/images/logo.jpg">
         <script src="https://kit.fontawesome.com/298cd1d7bc.js" crossorigin="anonymous"></script>
-
-
+        <style>
+            body{
+                display: flex;
+                width: 100vw;
+                min-height: 100vh;
+            }
+            
+        </style>
+        
         
         <link href="./assets/css/reset.css" rel="stylesheet" type="text/css">
         <link href="./assets/css/styles.css" rel="stylesheet" type="text/css">
@@ -28,7 +35,7 @@
                         <td><input type="text" id="password1" name="password1" style="width: 160px" required></td>
                     </tr>
                     <tr>              
-                        <td colspan="2" ><input type="submit" style="width: 100%" value="Submit"></td>
+                        <td colspan="2" ><input type="submit" style="width: 100%" value="Log In"></td>
                     </tr>
                 </table>
             </form>
@@ -75,17 +82,17 @@
         <div class="right">
             <div class="logo"></div>  
             <ul id="contact-list" >
-                <li><a href="https://www.facebook.com/lwnhuy"><i class="fa-brands fa-facebook" ></i></a></li>
-                <li><a href="https://github.com/lnhwqi/ZNewsClone"><i class="fa-brands fa-github" ></i></a></li>
-                <li><a href="tel:+84948205746"><i class="fa-solid fa-phone" ></i></a></li>
-                <li><a href="lnhuy2024@gmail.com"><i class="fa-solid fa-envelope"></i></a></li>
+                <li><a target="_blank" href="https://www.facebook.com/lwnhuy"><i class="fa-brands fa-facebook" ></i></a></li>
+                <li><a target="_blank" href="https://github.com/lnhwqi/ZNewsClone"><i class="fa-brands fa-github" ></i></a></li>
+                <li><a target="_blank" href="tel:+84948205746"><i class="fa-solid fa-phone" ></i></a></li>
+                <li><a target="_blank" href="lnhuy2024@gmail.com"><i class="fa-solid fa-envelope"></i></a></li>
             </ul>
         </div>
         
         <script>
-            const titleString = "Welcome, hello, Im hwqi, let sign up for log in";
-            const subtitleString = " - - - - - - - - - - - - - - - - - - - - - - - - - - ";
-            const descString = "hairs not straight, im too ";
+            const titleString = "Hello, I'm Huy. Welcome to 'Hwqi Project'";
+            const subtitleString = " Foremost, we provide family services (your home, your pet, your child, . . . .)  ";
+            const descString = "- - - - - - - - - - - - - - - hairs not straight, we too. - - - - - - - - - - - - - - -";
             
             
             const login= document.getElementById("log-in");
@@ -142,8 +149,7 @@
 
             for (var i = 0; i < xBtn.length; i++) {
                 xBtn[i].addEventListener('click', myFunction, false);
-            }
-            
+            }      
         </script>
     </body>
 

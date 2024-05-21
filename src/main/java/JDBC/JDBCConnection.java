@@ -22,7 +22,7 @@ import java.util.logging.Logger;
 public class JDBCConnection {
 
     public static Connection getJDBCConnection(){
-        String url="jdbc:mysql://localhost:3306/weblab5?user=root;password=1234567";
+        String url="jdbc:mysql://localhost:3306/hwqi?user=root;password=1234567";
         String user = "root";
         String password = "1234567";
         try {
