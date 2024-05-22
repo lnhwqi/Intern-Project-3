@@ -31,7 +31,7 @@ body {
     width: 64%;
     padding: 4%;
     /*font-family: "Gill Sans", sans-serif;*/ 
-    color: #fff;
+    color: var(--primary-bgc);
 
 }
 .left #title{

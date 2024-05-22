@@ -32,7 +32,7 @@
                     </tr>
                     <tr> 
                         <th>Password: </th>
-                        <td><input type="text" id="password1" name="password1" style="width: 160px" required></td>
+                        <td><input type="password" id="password1" name="password1" style="width: 160px" required></td>
                     </tr>
                     <tr>              
                         <td colspan="2" ><input type="submit" style="width: 100%" value="Log In"></td>
@@ -43,23 +43,26 @@
         <div id="sign-up-modal" style="position: absolute">
             <h2 class="sign-up-title">SIGN UP</h2>
             <i  class="x-btn fa-solid fa-x"></i>
-            <form action="Signup" method="post">
+            <form id="Signupform" action="Signup" method="post">
                 <table>
                     <tr> 
                         <th>Username: </th>
-                        <td><input type="text" id="username" name="username" style="width: 160px" required></td>
+                        <td><input type="text" id="username" name="username" style="width: 100%" required></td>
                     </tr>
                     <tr> 
                         <th>Password: </th>
-                        <td><input type="text" id="password" name="password" style="width: 160px" required></td>
+                        <td><input type="password" id="password" name="password" style="width: 100%" required></td>
                     </tr>
                     <tr> 
                         <th>Password (*): </th>
-                        <td><input type="text" id="password2" name="password2" style="width: 160px" required></td>
+                        <td><input type="password" id="password2" name="password2" style="width: 100%" required></td>
+                    </tr>
+                    <tr> 
+                        <th id="message" colspan="2" style="text-align: center; font-size: 12px"></th>
                     </tr>
                     <tr> 
                         <th>Phone: </th>
-                        <td><input type="text" id="phone" name="phone" style="width: 160px" required></td>
+                        <td><input type="tel" id="phone" name="phone" style="width: 100%" pattern="[0-9]{10}" required></td>
                     </tr>
                     <tr>              
                         <td colspan="2" ><input class="sign-up-btn" type="submit" style="width: 100%" value="Submit"></td>
@@ -91,7 +94,7 @@
         
         <script>
             const titleString = "Hello, I'm Huy. Welcome to 'Hwqi Project'";
-            const subtitleString = " Foremost, we provide family services (your home, your pet, your child, . . . .)  ";
+            const subtitleString = " ***, This project is used for internship! We provide family services (your home, your pet, your child, . . . .)  ";
             const descString = "- - - - - - - - - - - - - - - hairs not straight, we too. - - - - - - - - - - - - - - -";
             
             
@@ -150,6 +153,19 @@
             for (var i = 0; i < xBtn.length; i++) {
                 xBtn[i].addEventListener('click', myFunction, false);
             }      
+            
+            document.getElementById('Signupform').addEventListener('submit', function(event) {
+                event.preventDefault();  // Prevent the form from submitting
+
+                let message = document.getElementById('message');
+
+                if (document.getElementById('password').value === document.getElementById('password2').value) {
+                    event.target.submit();
+                } else {
+                    message.style.color = 'red';
+                    message.textContent = 'Passwords do not match. Please try again.';
+                }
+            });
         </script>
     </body>
 

@@ -2,7 +2,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-
 package Actions;
 
 import JDBC.JDBCConnection;
@@ -23,11 +22,11 @@ import java.sql.SQLException;
  *
  * @author lengo
  */
-@WebServlet(name="Signup", urlPatterns={"/Signup"})
+@WebServlet(name = "Signup", urlPatterns = {"/Signup"})
 public class Signup extends HttpServlet {
-   
-   protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
+
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
 //            /* TODO output your page here. You may use following sample code. */
@@ -41,11 +40,12 @@ public class Signup extends HttpServlet {
 //            out.println("</body>");
 //            out.println("</html>");
         }
-    } 
+    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /** 
+    /**
      * Handles the HTTP <code>GET</code> method.
+     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
@@ -53,12 +53,13 @@ public class Signup extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
+            throws ServletException, IOException {
 //        processRequest(request, response);
-    } 
+    }
 
-    /** 
+    /**
      * Handles the HTTP <code>POST</code> method.
+     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
@@ -66,44 +67,42 @@ public class Signup extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
+            throws ServletException, IOException {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
         String phone = request.getParameter("phone");
 
         int newUser = addClient(username, password, phone);
-        String message ="";
-        
+        String message = "";
+
         try (PrintWriter out = response.getWriter()) {
             if (newUser > 0) {
                 response.sendRedirect("index.html");
             } else {
-                message="Username used, Please, try to use another one!";
+                message = "Username used, Please, try to use another one!";
                 request.setAttribute("message", message);
                 RequestDispatcher dispatcher = request.getRequestDispatcher("Signup.jsp");
                 dispatcher.forward(request, response);
             }
         }
-        
+
     }
 
-    /** 
+    /**
      * Returns a short description of the servlet.
+     *
      * @return a String containing servlet description
      */
     @Override
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-    
-    
-    private static int addClient(String username, String password, String phone){
+
+    private static int addClient(String username, String password, String phone) {
         int result = 0;
         String sql = "insert into client(username, password, phone) values('" + username + "','" + password + "','" + phone + "')";
-        
-        try (Connection conn = JDBCConnection.getJDBCConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
 
+        try (Connection conn = JDBCConnection.getJDBCConnection(); PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             result = stmt.executeUpdate(sql);
         } catch (SQLException e) {

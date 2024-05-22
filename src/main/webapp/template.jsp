@@ -92,7 +92,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
         %>
         <div id="announce" style="z-index:3; position: absolute; top: 50%; left: 50%; transform: translateX(-50%) translateY(-50%) ;display: none; padding: 32px; border-radius: 12px; background: var(--primary-bgc); font-weight: 700; color: var(--primary-color)">
             <h1 style="text-align:center; line-height: 1.4">Ooops! That time has been book, Let choose another options, sorry for inconvenience</h1>
-            <div id='close-btn' style="position: absolute; top: 0; right: 0; padding: 16px; color: #DD3333; background: var(--primary-color); border-top-right-radius: 12px;border-bottom-left-radius: 12px">x</div>
+            <div id='close-btn' style="position: absolute; top: 0; right: 0; padding: 6px; color: #DD3333; background: var(--primary-color); border-top-right-radius: 12px;border-bottom-left-radius: 12px">x</div>
         </div>
         <a id="backPage" href="#!" style="position:absolute; top: 24px; right: 24px; padding: 8px 12px; background: var(--primary-bgc); color: var(--primary-color); font-weight: 700; border: 1px solid #000; border-radius: 4px">Back</a>
         <div id="blur" style=""></div>

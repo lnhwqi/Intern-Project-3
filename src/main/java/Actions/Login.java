@@ -119,16 +119,13 @@ public class Login extends HttpServlet {
         try (Connection conn = JDBCConnection.getJDBCConnection();
              PreparedStatement stmt = conn.prepareStatement(sqlQuery)) {
 
-            // Set parameters
             stmt.setString(1, username);
             stmt.setString(2, password);
 
             try (ResultSet rs = stmt.executeQuery()) {
                 if (rs.next()) {
-                    // If there is a match, username and password are correct
                     state = 2;
                 } else {
-                    // If there is no match, check if the username exists
                     String sqlUserCheck = "SELECT * FROM client WHERE username=?";
 
                     try (PreparedStatement userCheckStmt = conn.prepareStatement(sqlUserCheck)) {
@@ -136,7 +133,6 @@ public class Login extends HttpServlet {
 
                         try (ResultSet userCheckRs = userCheckStmt.executeQuery()) {
                             if (userCheckRs.next()) {
-                                // Username exists, but password is incorrect
                                 state = 1;
                             }
                         }
